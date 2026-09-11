@@ -6,6 +6,7 @@ const { execFileSync } = require("node:child_process");
 const { readFileSync } = require("node:fs");
 
 const manifestPaths = [
+  "package.json",
   "plugin.json",
   ".codex-plugin/plugin.json",
   ".claude-plugin/plugin.json",

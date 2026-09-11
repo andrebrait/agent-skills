@@ -98,6 +98,19 @@ claude --plugin-dir /path/to/agent-skills
 </details>
 
 <details>
+<summary><b>Oh My Pi (OMP)</b></summary>
+
+Install the native extension and shared skills:
+
+```bash
+omp plugin install github:addyosmani/agent-skills
+```
+
+Restart OMP after installation. The extension loads the canonical discovery workflow for each new user run; invoke individual skills with `/skill:<name>`. See [docs/omp-setup.md](docs/omp-setup.md) for local installs, lifecycle behavior, and verification.
+
+</details>
+
+<details>
 <summary><b>Cursor</b></summary>
 
 Put workflow skills under `.cursor/skills/` (sync from `agent-skills/skills/`) and short policies in `.cursor/rules/*.mdc` — do not paste full skills into rules. See [docs/cursor-setup.md](docs/cursor-setup.md).

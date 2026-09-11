@@ -28,6 +28,9 @@ jobs:
       - name: Test manifest version validator
         run: node --test scripts/validate-versions-test.js
 
+      - name: Test native OMP bootstrap
+        run: node --test scripts/omp-bootstrap-test.js
+
       - name: Test skill eval runner
         run: node --test scripts/run-evals-test.js
 

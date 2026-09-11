@@ -1,0 +1,23 @@
+{
+  "name": "agent-skills",
+  "version": "0.6.9",
+  "description": "Production-grade engineering skills for AI coding agents.",
+  "author": "Addy Osmani",
+  "license": "MIT",
+  "homepage": "https://github.com/addyosmani/agent-skills",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/addyosmani/agent-skills.git"
+  },
+  "files": [
+    "omp/agent-skills.ts",
+    "skills/",
+    "references/",
+    "agents/",
+    "docs/omp-setup.md"
+  ],
+  "omp": {
+    "extensions": ["./omp/agent-skills.ts"],
+    "skills": ["./skills"]
+  }
+}
