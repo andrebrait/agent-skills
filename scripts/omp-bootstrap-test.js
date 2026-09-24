@@ -72,3 +72,20 @@ test("a failed read removes stale policy, reports the error, and recovers next r
   assert.ok(recovered.systemPrompt[1].includes("# Recovered policy"));
   assert.equal(recovered.message, undefined);
 });
+
+test("drops restated sections, keeping discovery aids when OMP lists no skills", async (t) => {
+  const { skill, emit } = await sandbox(t);
+  await writeFile(
+    skill,
+    "# Using\n\n## Skill Discovery\nflowchart\n\n## Core Operating Behaviors\n### 1. Surface\nkeep\n\n## Failure Modes to Avoid\nrestated\n\n## Quick Reference\ntable\n",
+  );
+  const listed = (await emit("before_agent_start", { prompt: "Run", systemPrompt: ["<skills>\n- tdd: x\n</skills>"] })).systemPrompt[1];
+  const unlisted = (await emit("before_agent_start", { prompt: "Run", systemPrompt: ["Base policy"] })).systemPrompt[1];
+
+  for (const block of [listed, unlisted]) {
+    assert.ok(block.includes("### 1. Surface\nkeep"));
+    assert.ok(!block.includes("Failure Modes"));
+  }
+  assert.ok(!listed.includes("flowchart") && !listed.includes("## Quick Reference"));
+  assert.ok(unlisted.includes("## Skill Discovery\nflowchart") && unlisted.includes("## Quick Reference\ntable"));
+});
